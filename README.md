@@ -1,41 +1,62 @@
-# Gemini Clone
+# MindGPT
 
-Gemini Clone is a project aimed at replicating the functionality of Gemini, powered by the Google Gemini API, using React and CSS.
+MindGPT is separated into two applications:
 
-## Table of Contents
+```text
+frontend/   React + Webpack user interface
+backend/    Express API, authentication, user data, and Google AI integration
+```
 
-- [Introduction](#introduction)
-- [Features](#features)
-  - [Core Features](#core-features)
-  - [Additional Features](#additional-features)
-  - [Potential Enhancements](#potential-enhancements)
+## Setup
 
-## Introduction
+```bash
+npm run install:all
+```
 
-This project introduces a React-based web application that functions as a clone of the Google Gemini AI chatbot. It provides a user-friendly interface for interacting with the powerful Gemini model, allowing you to ask questions and receive informative responses in a conversational manner.
+Copy `backend/.env.example` to `backend/.env`, then add your API key and secrets.
 
-## Features
+Set the MongoDB connection in `backend/.env`:
 
-### Core Features
+```env
+MONGODB_URI=mongodb://127.0.0.1:27017/mindgpt
+CORS_ORIGINS=http://localhost:3000
+```
 
-- **Chat Interface:** Provides a dedicated interface for interacting with the Gemini model in a conversational style.
-- **Simulated Typing Effect:** Enhances the user experience by mimicking a natural typing effect during responses.
-- **Google Gemini Integration:** Utilizes the capabilities of the Google Gemini model for generating informative responses.
+Passwords are stored only as bcrypt hashes, never as plaintext.
 
-### Additional Features
+For deployed frontends, add comma-separated origins:
 
-- **React-based Development:** Leverages React's efficient component-based approach for building the application.
-- **CSS Styling:** Employs CSS to style the user interface for visual appeal and usability.
+```env
+CORS_ORIGINS=http://localhost:3000,https://your-mindgpt-site.example
+```
 
-### Potential Enhancements
+To migrate accounts from the previous JSON user file:
 
-- **Conversation History:** Keeps a record of past interactions for reference.
-- **Advanced UI Elements:** Introduces additional features like emojis, formatting options, or user avatars.
-- **Enhanced Functionality:** Explores integrating functionalities like image search or language translation.
+```bash
+npm --prefix backend run migrate:users
+```
 
-## Installation
+## Development
 
-1. Clone the repository:
+Run both applications from the project root:
 
-   ```bash
-   git clone https://github.com/iamakashpc/Gemini-Clone.git
+```bash
+npm run dev
+```
+
+- Frontend: `http://localhost:3000`
+- Backend: `http://localhost:8999`
+
+You can also run them independently:
+
+```bash
+npm --prefix frontend run dev
+npm --prefix backend run dev
+```
+
+## Checks
+
+```bash
+npm run lint
+npm run build
+```
